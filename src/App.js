@@ -1,11 +1,11 @@
 import React from 'react';
-import LetsDoThis from './components/LetsDoThis';
+import ValidBox from './components/ValidBox';
 
 export default class App extends React.Component {
   render() {
     return (
       <div className='app-container'>
-        <LetsDoThis />
+        <ValidBox />
       </div>
     );
   }
