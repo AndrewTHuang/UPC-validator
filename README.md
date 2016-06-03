@@ -5,19 +5,19 @@ This project was built on top of my own [simple-react-webpack](https://github.co
 ## Tools
 * React
 * Webpack
-..* including a small Express dev server
+ * including a small Express dev server
 * Babel (to transpile ES6)
 * SASS
 * Testing
-..* Karma
-..* Mocha + Chai
-..* [Enzyme](http://airbnb.io/enzyme/)
-..* PhantomJS
+ * Karma
+ * Mocha + Chai
+ * [Enzyme](http://airbnb.io/enzyme/)
+ * PhantomJS
 * Hot-reloading
 
 ## Usage
 ```
-> git clone https://github.com/AndrewTHuang/UPC-validatorgit
+> git clone https://github.com/AndrewTHuang/UPC-validator.git
 > cd UPC-validator
 > npm install
 > npm start
