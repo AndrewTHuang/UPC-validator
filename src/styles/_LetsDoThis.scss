@@ -1,0 +1,19 @@
+h1 {
+  text-align: center;
+  font-size: 30px;
+}
+
+.valid-box-container {
+  outline: 1px dashed green;
+  height: 60vh;
+  width: 20vw;
+  min-width: 200px;
+  position: relative;
+  left: 70%;
+  padding-top: 5%;
+}
+
+.valid-box {
+  outline: 1px solid green;
+  height: 80%;
+}
