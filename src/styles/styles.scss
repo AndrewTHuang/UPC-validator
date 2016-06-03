@@ -1,7 +1,17 @@
 @import 'App';
-@import 'ValidBox';
+@import 'InputForm';
 @import 'InvalidBox';
+@import 'ValidBox';
 
 body, html {
   height: 100%;
+}
+
+@media (max-width: 900px) {
+  .app-container {
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+
 }
