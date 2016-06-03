@@ -3,8 +3,8 @@ h1 {
   font-size: 30px;
 }
 
-.invalid-box-container {
-  outline: 1px dashed red;
+.input-form-container {
+  outline: 1px dashed black;
   height: 60vh;
   width: 20vw;
   min-width: 300px;
@@ -13,7 +13,7 @@ h1 {
   display: inline-block;
 }
 
-.invalid-box {
-  outline: 1px solid red;
+.input-form {
+  outline: 1px solid black;
   height: 80%;
 }
