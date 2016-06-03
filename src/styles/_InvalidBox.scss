@@ -3,18 +3,18 @@ h1 {
   font-size: 30px;
 }
 
-.valid-box-container {
-  outline: 1px dashed green;
+.invalid-box-container {
+  outline: 1px dashed red;
   height: 60vh;
   width: 20vw;
   min-width: 200px;
   position: relative;
-  left: 50%;
+  left: 40%;
   padding-top: 5%;
   display: inline-block;
 }
 
-.valid-box {
-  outline: 1px solid green;
+.invalid-box {
+  outline: 1px solid red;
   height: 80%;
 }
