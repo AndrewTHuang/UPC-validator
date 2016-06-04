@@ -10,6 +10,7 @@ export default class InputForm extends React.Component {
   submitCodes() {
     // Convert to string to preserve any leading zeros
     this.props.submitCodes(this.refs.upc.value.toString());
+    this.refs.upc.value = null;
   }
 
   render() {
