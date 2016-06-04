@@ -15,11 +15,11 @@ export default class App extends React.Component {
   }
 
   submitCodes(upc) {
-    const newCodes = [];
-    newCodes.push(upc);
+    const currentCodes = this.state.codes;
+    currentCodes.push(upc);
 
     this.setState({
-      codes: newCodes
+      codes: currentCodes
     })
   }
 
