@@ -7,7 +7,8 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      codes: [],
+      validCodes: [],
+      invalidCodes: [],
       readyToSubmit: false
     }
 
@@ -40,41 +41,50 @@ export default class App extends React.Component {
     }
   }
 
-  validateCode(upc, allCodes) {
+  // Called once per code
+  validateCode(upc, validCodes, invalidCodes) {
     // Check if UPC has 12 characters
     if (upc.length !== 12) {
-      alert('UPC codes must be 12 characters long. Please try again.')
-      return;
+      console.log('UPC codes must be 12 characters long. Please try again.')
+      // submit invalid
+      invalidCodes.push(upc);
+      return invalidCodes;
     }
 
     // Check if UPC's check digit is correct
     const checkDigit = this.calculateCheckDigit(upc.slice(0, -1));
     if (checkDigit != upc[upc.length - 1]) {
-      alert('This appears to be an invalid UPC code. Please try again')
-      return;
+      console.log('This appears to be an invalid UPC code. Please try again')
+      invalidCodes.push(upc);
+      return invalidCodes;
     }
 
     // If UPC is valid, pass it along
-    allCodes.push(upc);
-    return allCodes;
+    validCodes.push(upc);
+    return validCodes;
   }
 
   submitCodes(upc) {
-    const currentCodes = this.state.codes;
     const newCodes = this.parseCodes(upc);
-    let allCodes = [];
+    const currentValidCodes = this.state.validCodes;
+    const currentInvalidCodes = this.state.invalidCodes;
+    let validCodes = [];
+    let invalidCodes = [];
 
     // Validate before doing anything with the codes.
     newCodes.forEach(code => {
-      this.validateCode(code, allCodes);
+      this.validateCode(code, validCodes, invalidCodes);
     });
 
-    // If good, then add.
-    allCodes = currentCodes.concat(allCodes);
+    if (validCodes.length > 0) {
+      validCodes = currentValidCodes.concat(validCodes);
+      this.setState({ validCodes })
+    }
 
-    this.setState({
-      codes: allCodes
-    })
+    if (invalidCodes.length > 0) {
+      invalidCodes = currentInvalidCodes.concat(invalidCodes);
+      this.setState({ invalidCodes })
+    }
   }
 
   render() {
@@ -83,9 +93,11 @@ export default class App extends React.Component {
         <InputForm
           submitCodes={this.submitCodes}
         />
-        <InvalidBox />
+        <InvalidBox
+          codes={this.state.invalidCodes}
+        />
         <ValidBox
-          codes={this.state.codes}
+          codes={this.state.validCodes}
         />
       </div>
     );
