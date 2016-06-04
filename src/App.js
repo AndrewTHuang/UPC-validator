@@ -12,7 +12,7 @@ export default class App extends React.Component {
       readyToSubmit: false
     }
 
-    this.submitCodes = this.submitCodes.bind(this);
+    this.checkCodes = this.checkCodes.bind(this);
     this.calculateCheckDigit = this.calculateCheckDigit.bind(this);
     this.validateCode = this.validateCode.bind(this);
   }
@@ -41,12 +41,10 @@ export default class App extends React.Component {
     }
   }
 
-  // Called once per code
   validateCode(upc, validCodes, invalidCodes) {
     // Check if UPC has 12 characters
     if (upc.length !== 12) {
       console.log('UPC codes must be 12 characters long. Please try again.')
-      // submit invalid
       invalidCodes.push(upc);
       return invalidCodes;
     }
@@ -64,7 +62,7 @@ export default class App extends React.Component {
     return validCodes;
   }
 
-  submitCodes(upc) {
+  checkCodes(upc) {
     const newCodes = this.parseCodes(upc);
     const currentValidCodes = this.state.validCodes;
     const currentInvalidCodes = this.state.invalidCodes;
@@ -76,14 +74,16 @@ export default class App extends React.Component {
       this.validateCode(code, validCodes, invalidCodes);
     });
 
+    // If there were valid codes in the InputForm, render them in the ValidBox
     if (validCodes.length > 0) {
       validCodes = currentValidCodes.concat(validCodes);
-      this.setState({ validCodes })
+      this.setState({ validCodes });
     }
 
+    // If there were invalid codes in the InputForm, render them in the InvalidBox
     if (invalidCodes.length > 0) {
       invalidCodes = currentInvalidCodes.concat(invalidCodes);
-      this.setState({ invalidCodes })
+      this.setState({ invalidCodes });
     }
   }
 
@@ -91,7 +91,7 @@ export default class App extends React.Component {
     return (
       <div className='app-container'>
         <InputForm
-          submitCodes={this.submitCodes}
+          checkCodes={this.checkCodes}
         />
         <InvalidBox
           codes={this.state.invalidCodes}
