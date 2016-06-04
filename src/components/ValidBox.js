@@ -6,7 +6,9 @@ export default class ValidBox extends React.Component {
     return (
       <div className='valid-box-container'>
         <h1> Valid </h1>
-        <div className='valid-box'></div>
+        <div className='valid-box'>
+          {this.props.codes}
+        </div>
       </div>
     );
   }
