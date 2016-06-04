@@ -6,7 +6,9 @@ export default class InputForm extends React.Component {
     return (
       <div className='input-form-container'>
         <h1> Input UPC codes here </h1>
-        <div className='input-form'></div>
+        <form className='input-form' action="">
+          <textarea></textarea>
+        </form>
       </div>
     );
   }
