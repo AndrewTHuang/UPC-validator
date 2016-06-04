@@ -14,12 +14,22 @@ export default class App extends React.Component {
     this.submitCodes = this.submitCodes.bind(this);
   }
 
+  parseCodes(upc) {
+    if (upc.includes('\n')) {
+      const codes = upc.replace(/\r\n/g, '\n').split('\n');
+      return codes;
+    } else {
+      return [upc];
+    }
+  }
+
   submitCodes(upc) {
     const currentCodes = this.state.codes;
-    currentCodes.push(upc);
+    const newCodes = this.parseCodes(upc);
+    const allCodes = currentCodes.concat(newCodes);
 
     this.setState({
-      codes: currentCodes
+      codes: allCodes
     })
   }
 
