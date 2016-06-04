@@ -8,7 +8,8 @@ export default class InputForm extends React.Component {
   }
 
   submitCodes() {
-    this.props.submitCodes(this.refs.upc.value);
+    // Convert to string to preserve any leading zeros
+    this.props.submitCodes(this.refs.upc.value.toString());
   }
 
   render() {
