@@ -4,12 +4,12 @@ import styles from '../styles/styles.scss';
 export default class InputForm extends React.Component {
   constructor(props) {
     super(props);
-    this.submitCodes = this.submitCodes.bind(this);
+    this.checkCodes = this.checkCodes.bind(this);
   }
 
-  submitCodes() {
+  checkCodes() {
     // Convert to string to preserve any leading zeros
-    this.props.submitCodes(this.refs.upc.value.toString());
+    this.props.checkCodes(this.refs.upc.value.toString());
     this.refs.upc.value = null;
   }
 
@@ -18,7 +18,7 @@ export default class InputForm extends React.Component {
       <div className='input-form-container'>
         <h1> Input UPC codes here </h1>
           <textarea ref='upc' className='input-form' autoFocus />
-          <button onClick={this.submitCodes}> Submit Codes </button>
+          <button onClick={this.checkCodes}> Check Codes </button>
       </div>
     )
   }
