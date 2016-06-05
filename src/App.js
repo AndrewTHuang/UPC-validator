@@ -78,6 +78,7 @@ export default class App extends React.Component {
     if (validCodes.length > 0) {
       validCodes = currentValidCodes.concat(validCodes);
       this.setState({ validCodes });
+      this.setState({ readyToSubmit: true });
     }
 
     // If there were invalid codes in the InputForm, render them in the InvalidBox
@@ -98,6 +99,7 @@ export default class App extends React.Component {
         />
         <ValidBox
           codes={this.state.validCodes}
+          readyToSubmit={this.state.readyToSubmit}
         />
       </div>
     );
