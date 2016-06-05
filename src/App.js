@@ -63,7 +63,7 @@ export default class App extends React.Component {
     if (checkDigit != upc[upc.length - 1]) {
       const errorObject = {
         code: upc,
-        message: 'This appears to be an invalid UPC code.'
+        message: `Check digit is incorrect. Are you sure it's not ${checkDigit}?`
       };
       invalidCodes.push(errorObject);
       return invalidCodes;
