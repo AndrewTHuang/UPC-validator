@@ -42,6 +42,12 @@ export default class App extends React.Component {
   }
 
   validateCode(upc, validCodes, invalidCodes) {
+    // Check if UPC has already been entered
+    if (this.state.validCodes.includes(upc) || this.state.invalidCodes.includes(upc)) {
+      console.log('This UPC code has already been entered.')
+      return;
+    }
+
     // Check if UPC has 12 characters
     if (upc.length !== 12) {
       console.log('UPC codes must be 12 characters long. Please try again.')
