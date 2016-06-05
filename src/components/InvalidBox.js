@@ -3,9 +3,12 @@ import styles from '../styles/styles.scss';
 
 export default class InvalidBox extends React.Component {
   render() {
-    const codes = this.props.codes.map((code, index) => {
+    const codes = this.props.codes.map((obj, index) => {
       return (
-        <p key={index}>{code}</p>
+        <div key={index}>
+          <p>{obj.code}</p>
+          <p>{obj.message}</p>
+        </div>
       )
     })
 

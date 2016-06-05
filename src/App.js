@@ -50,16 +50,22 @@ export default class App extends React.Component {
 
     // Check if UPC has 12 characters
     if (upc.length !== 12) {
-      console.log('UPC codes must be 12 characters long. Please try again.')
-      invalidCodes.push(upc);
+      const errorObject = {
+        code: upc,
+        message: 'UPC codes must be 12 characters long.'
+      };
+      invalidCodes.push(errorObject);
       return invalidCodes;
     }
 
     // Check if UPC's check digit is correct
     const checkDigit = this.calculateCheckDigit(upc.slice(0, -1));
     if (checkDigit != upc[upc.length - 1]) {
-      console.log('This appears to be an invalid UPC code. Please try again')
-      invalidCodes.push(upc);
+      const errorObject = {
+        code: upc,
+        message: 'This appears to be an invalid UPC code.'
+      };
+      invalidCodes.push(errorObject);
       return invalidCodes;
     }
 
