@@ -4,7 +4,6 @@ h1 {
 }
 
 .valid-box-container {
-  outline: 1px dashed green;
   height: 60vh;
   width: 20vw;
   min-width: 300px;
@@ -16,4 +15,10 @@ h1 {
 .valid-box {
   outline: 1px solid green;
   height: 80%;
+  font-size: 20px;
+  // padding: 5%;
+}
+
+.valid-row {
+  padding: 5%;
 }
