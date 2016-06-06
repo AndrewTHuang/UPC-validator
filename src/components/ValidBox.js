@@ -1,6 +1,8 @@
 import React from 'react';
 import styles from '../styles/styles.scss';
 
+const colors = ['rgba(0, 128, 0, 0.1)', 'rgba(160, 160, 160, 0.1)'];
+
 export default class ValidBox extends React.Component {
   constructor(props) {
     super(props);
@@ -33,8 +35,14 @@ export default class ValidBox extends React.Component {
 
   render() {
     const codes = this.props.codes.map((code, index) => {
+      const style = {
+        backgroundColor: colors[index % 2]
+      }
+
       return (
-        <p key={index}>{code}</p>
+        <div key={index} style={style} className='valid-row'>
+          {code}
+        </div>
       )
     })
 
