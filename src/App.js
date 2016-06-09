@@ -51,7 +51,7 @@ export default class App extends React.Component {
 
   validateCode(upc, validCodes, invalidCodes) {
     // Check for duplicate UPC
-    if (this.state.validCodes.includes(upc) || this.state.invalidCodes.includes(upc)) {
+    if (this.state.validCodes.includes(upc) || this.state.invalidCodes.some(invalid => invalid.code == upc)) {
       this.toggleNotification(`You've already entered that UPC code.`, { backgroundColor: 'black' });
       return;
     }
