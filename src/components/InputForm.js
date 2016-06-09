@@ -8,9 +8,11 @@ export default class InputForm extends React.Component {
   }
 
   checkCodes() {
-    // Convert to string to preserve any leading zeros
-    this.props.checkCodes(this.refs.upc.value.toString());
-    this.refs.upc.value = null;
+    if (this.refs.upc.value != '\n' && this.refs.upc.value != '') {
+      // Convert to string to preserve any leading zeros
+      this.props.checkCodes(this.refs.upc.value.toString());
+      this.refs.upc.value = null;
+    }
   }
 
   render() {
@@ -18,7 +20,7 @@ export default class InputForm extends React.Component {
       <div className='input-form-container'>
         <p className='header'> Input UPC codes </p>
           <textarea ref='upc' className='input-form' autoFocus />
-          <button onClick={this.checkCodes} className='button' id='check-button'> Check Codes </button>
+          <button onClick={this.checkCodes} className='button' id='black-button'> Check Codes </button>
       </div>
     )
   }

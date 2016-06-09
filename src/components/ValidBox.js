@@ -23,10 +23,11 @@ export default class ValidBox extends React.Component {
     })
     .then(res => {
       if (res.ok) {
-        this.props.toggleNotification('UPC codes successfully submitted!', { backgroundColor: 'green' })
+        this.props.toggleNotification('UPC codes successfully submitted!', { backgroundColor: 'green' });
+        this.props.clearValidCodes();
       } else {
         console.log('Uh oh, something went wrong! Got status code ' + res.status);
-        this.props.toggleNotification('Uh oh, something went wrong! Please try again.', { backgroundColor: 'red' })
+        this.props.toggleNotification('Uh oh, something went wrong! Please try again.', { backgroundColor: 'red' });
       }
     })
     .catch(err => {
@@ -54,7 +55,7 @@ export default class ValidBox extends React.Component {
           {codes}
         </div>
         {(this.props.readyToSubmit)
-          ? <button onClick={this.submitValidCodes} className='button green-button' id='submit-button'> Submit Valid Codes </button>
+          ? <button onClick={this.submitValidCodes} className='button' id='green-button'> Submit Valid Codes </button>
           : null
         }
       </div>
