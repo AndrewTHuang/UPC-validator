@@ -2,6 +2,7 @@ import React from 'react';
 import InputForm from './components/InputForm';
 import InvalidBox from './components/InvalidBox';
 import ValidBox from './components/ValidBox';
+import { Notification } from 'react-notification';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -9,12 +10,19 @@ export default class App extends React.Component {
     this.state = {
       validCodes: [],
       invalidCodes: [],
-      readyToSubmit: false
+      readyToSubmit: false,
+      notificationIsActive: false,
+      notificationMessage: '',
+      barStyle: {
+        backgroundColor: 'black',
+        borderRadius: '15px'
+      }
     }
 
     this.checkCodes = this.checkCodes.bind(this);
     this.calculateCheckDigit = this.calculateCheckDigit.bind(this);
     this.validateCode = this.validateCode.bind(this);
+    this.toggleNotification = this.toggleNotification.bind(this);
   }
 
   // Assumes length 11
@@ -42,9 +50,9 @@ export default class App extends React.Component {
   }
 
   validateCode(upc, validCodes, invalidCodes) {
-    // Check if UPC has already been entered
+    // Check for duplicate UPC
     if (this.state.validCodes.includes(upc) || this.state.invalidCodes.includes(upc)) {
-      console.log('This UPC code has already been entered.')
+      this.toggleNotification(`You've already entered that UPC code.`, { backgroundColor: 'black' });
       return;
     }
 
@@ -100,11 +108,25 @@ export default class App extends React.Component {
     }
   }
 
+  toggleNotification(message, barStyle) {
+    this.setState({
+      notificationIsActive: !this.state.notificationIsActive,
+      notificationMessage: message || this.state.notificationMessage,
+      barStyle: barStyle || this.state.barStyle
+    });
+  }
+
   render() {
     return (
       <div className='app-container'>
         <InputForm
           checkCodes={this.checkCodes}
+        />
+        <Notification
+          isActive={this.state.notificationIsActive}
+          message={this.state.notificationMessage}
+          onDismiss={this.toggleNotification}
+          barStyle={this.state.barStyle}
         />
         <InvalidBox
           codes={this.state.invalidCodes}
@@ -112,6 +134,7 @@ export default class App extends React.Component {
         <ValidBox
           codes={this.state.validCodes}
           readyToSubmit={this.state.readyToSubmit}
+          toggleNotification={this.toggleNotification}
         />
       </div>
     );

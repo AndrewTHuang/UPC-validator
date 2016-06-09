@@ -23,9 +23,10 @@ export default class ValidBox extends React.Component {
     })
     .then(res => {
       if (res.ok) {
-        console.log('UPC codes successfully submitted!');
+        this.props.toggleNotification('UPC codes successfully submitted!', { backgroundColor: 'green' })
       } else {
-        console.log('Uh oh, something went wrong. Got status code ' + res.status);
+        console.log('Uh oh, something went wrong! Got status code ' + res.status);
+        this.props.toggleNotification('Uh oh, something went wrong! Please try again.', { backgroundColor: 'red' })
       }
     })
     .catch(err => {
