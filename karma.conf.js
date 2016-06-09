@@ -8,7 +8,8 @@ module.exports = function(config) {
     singleRun: true,
     frameworks: [ 'mocha', 'chai' ],
     files: [
-      'tests.webpack.js'
+      'tests.webpack.js',
+      'node_modules/babel-polyfill/dist/polyfill.js'
     ],
     preprocessors: {
       'tests.webpack.js': [ 'webpack', 'sourcemap' ]
