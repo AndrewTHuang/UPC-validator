@@ -48,12 +48,12 @@ export default class ValidBox extends React.Component {
 
     return (
       <div className='valid-box-container'>
-        <h1> Valid </h1>
+        <p className='header'> Valid </p>
         <div className='valid-box'>
           {codes}
         </div>
         {(this.props.readyToSubmit)
-          ? <button onClick={this.submitValidCodes}> Submit Valid Codes </button>
+          ? <button onClick={this.submitValidCodes} className='button green-button' id='submit-button'> Submit Valid Codes </button>
           : null
         }
       </div>

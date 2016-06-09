@@ -20,7 +20,7 @@ export default class InvalidBox extends React.Component {
 
     return (
       <div className='invalid-box-container'>
-        <h1> Invalid </h1>
+        <p className='header'> Invalid </p>
         <div className='invalid-box'>
           {codes}
         </div>
