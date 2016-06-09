@@ -23,6 +23,7 @@ export default class App extends React.Component {
     this.calculateCheckDigit = this.calculateCheckDigit.bind(this);
     this.validateCode = this.validateCode.bind(this);
     this.toggleNotification = this.toggleNotification.bind(this);
+    this.clearValidCodes = this.clearValidCodes.bind(this);
   }
 
   // Assumes length 11
@@ -116,6 +117,10 @@ export default class App extends React.Component {
     });
   }
 
+  clearValidCodes() {
+    this.setState({ validCodes: [] });
+  }
+
   render() {
     return (
       <div className='app-container'>
@@ -135,6 +140,7 @@ export default class App extends React.Component {
           codes={this.state.validCodes}
           readyToSubmit={this.state.readyToSubmit}
           toggleNotification={this.toggleNotification}
+          clearValidCodes={this.clearValidCodes}
         />
       </div>
     );

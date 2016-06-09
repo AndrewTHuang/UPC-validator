@@ -20,7 +20,7 @@ export default class InputForm extends React.Component {
       <div className='input-form-container'>
         <p className='header'> Input UPC codes </p>
           <textarea ref='upc' className='input-form' autoFocus />
-          <button onClick={this.checkCodes} className='button' id='check-button'> Check Codes </button>
+          <button onClick={this.checkCodes} className='button' id='black-button'> Check Codes </button>
       </div>
     )
   }
