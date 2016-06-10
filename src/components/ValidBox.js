@@ -62,3 +62,10 @@ export default class ValidBox extends React.Component {
     );
   }
 }
+
+ValidBox.propTypes = {
+  codes: React.PropTypes.array.isRequired,
+  readyToSubmit: React.PropTypes.bool.isRequired,
+  toggleNotification: React.PropTypes.func.isRequired,
+  clearValidCodes: React.PropTypes.func.isRequired,
+}

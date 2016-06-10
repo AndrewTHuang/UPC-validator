@@ -28,3 +28,7 @@ export default class InvalidBox extends React.Component {
     );
   }
 }
+
+InvalidBox.propTypes = {
+  codes: React.PropTypes.array.isRequired
+}

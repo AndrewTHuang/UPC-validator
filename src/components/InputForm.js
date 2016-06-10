@@ -25,3 +25,7 @@ export default class InputForm extends React.Component {
     )
   }
 }
+
+InputForm.propTypes = {
+  checkCodes: React.PropTypes.func.isRequired
+}
