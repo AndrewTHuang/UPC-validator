@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from '../styles/styles.scss';
 
+// These colors are used to alternate background shading for each UPC in the list.
 const colors = ['rgba(0, 128, 0, 0.1)', 'rgba(160, 160, 160, 0.1)'];
 
 export default class ValidBox extends React.Component {
@@ -37,6 +38,7 @@ export default class ValidBox extends React.Component {
 
   render() {
     const codes = this.props.codes.map((code, index) => {
+      // Alternate background colors
       const style = {
         backgroundColor: colors[index % 2]
       }
@@ -54,7 +56,7 @@ export default class ValidBox extends React.Component {
         <div className='valid-box'>
           {codes}
         </div>
-        {(this.props.readyToSubmit)
+        {(this.props.readyToSubmit)  // Only render the Submit button if there are valid codes to submit
           ? <button onClick={this.submitValidCodes} className='button' id='green-button'> Submit Valid Codes </button>
           : null
         }
