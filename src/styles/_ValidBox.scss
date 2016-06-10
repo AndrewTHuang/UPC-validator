@@ -1,20 +1,3 @@
-.valid-box-container {
-  height: 60vh;
-  width: 20vw;
-  min-width: 300px;
-  position: relative;
-  padding-top: 5%;
-  text-align: center;
-}
-
-.valid-box {
-  outline: 1px solid green;
-  height: 80%;
-  font-size: 20px;
-  text-align: left;
-  background-color: white;
-}
-
-.valid-row {
-  padding: 5%;
+.box.valid-box {
+  outline-color: green;
 }

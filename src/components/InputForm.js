@@ -17,7 +17,7 @@ export default class InputForm extends React.Component {
 
   render() {
     return (
-      <div className='input-form-container'>
+      <div className='container input-form-container'>
         <p className='header'> Input UPC codes </p>
           <textarea ref='upc' className='input-form' autoFocus />
           <button onClick={this.checkCodes} className='button' id='black-button'> Check Codes </button>

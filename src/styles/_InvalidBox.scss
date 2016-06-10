@@ -1,21 +1,5 @@
-.invalid-box-container {
-  height: 60vh;
-  width: 20vw;
-  min-width: 300px;
-  position: relative;
-  padding-top: 5%;
-}
-
-.invalid-box {
-  outline: 1px solid red;
-  height: 80%;
-  font-size: 20px;
-  text-align: left;
-  background-color: white;
-}
-
-.invalid-row {
-  padding: 5%;
+.box.invalid-box {
+  outline-color: red;
 }
 
 .invalid-message {

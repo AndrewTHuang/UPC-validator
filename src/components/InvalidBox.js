@@ -13,7 +13,7 @@ export default class InvalidBox extends React.Component {
       }
 
       return (
-        <div key={index} style={style} className='invalid-row'>
+        <div key={index} style={style} className='row'>
           <div>{obj.code}</div>
           <div className='invalid-message'>{obj.message}</div>
         </div>
@@ -21,9 +21,9 @@ export default class InvalidBox extends React.Component {
     })
 
     return (
-      <div className='invalid-box-container'>
+      <div className='container'>
         <p className='header'> Invalid </p>
-        <div className='invalid-box'>
+        <div className='box invalid-box'>
           {codes}
         </div>
       </div>

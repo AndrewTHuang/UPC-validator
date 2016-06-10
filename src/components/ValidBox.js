@@ -44,16 +44,16 @@ export default class ValidBox extends React.Component {
       }
 
       return (
-        <div key={index} style={style} className='valid-row'>
+        <div key={index} style={style} className='row'>
           {code}
         </div>
       )
     })
 
     return (
-      <div className='valid-box-container'>
+      <div className='container'>
         <p className='header'> Valid </p>
-        <div className='valid-box'>
+        <div className='box valid-box'>
           {codes}
         </div>
         {(this.props.readyToSubmit)  // Only render the Submit button if there are valid codes to submit
