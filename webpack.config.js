@@ -31,11 +31,14 @@ module.exports = {
         test: /\.(png|jpg|gif|svg)$/,
         loaders: ['url?limit=8192'],
         include: path.join(__dirname, 'src/assets')
+      },
+      {
+        test: /\.json$/,
+        loaders: ['json-loader']
       }
     ]
   },
   externals: {
-    'cheerio': 'window',
     'react/lib/ExecutionEnvironment': true,
     'react/lib/ReactContext': true
   }
