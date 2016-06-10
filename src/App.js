@@ -10,6 +10,7 @@ export default class App extends React.Component {
     this.state = {
       invalidCodes: [],
       validCodes: [],
+      readyToClear: false,
       readyToSubmit: false,
       notificationIsActive: false,
       notificationMessage: '',
@@ -21,6 +22,7 @@ export default class App extends React.Component {
 
     this.calculateCheckDigit = this.calculateCheckDigit.bind(this);
     this.checkCodes = this.checkCodes.bind(this);
+    this.clearInvalidCodes = this.clearInvalidCodes.bind(this);
     this.clearValidCodes = this.clearValidCodes.bind(this);
     this.toggleNotification = this.toggleNotification.bind(this);
     this.validateCode = this.validateCode.bind(this);
@@ -64,11 +66,18 @@ export default class App extends React.Component {
     if (invalidCodes.length > 0) {
       invalidCodes = currentInvalidCodes.concat(invalidCodes);
       this.setState({ invalidCodes });
+      this.setState({ readyToClear: true });
     }
+  }
+
+  clearInvalidCodes() {
+    this.setState({ invalidCodes: [] });
+    this.setState({ readyToClear: false });
   }
 
   clearValidCodes() {
     this.setState({ validCodes: [] });
+    this.setState({ readyToSubmit: false });
   }
 
   parseCodes(upc) {
@@ -144,6 +153,8 @@ export default class App extends React.Component {
         />
         <InvalidBox
           codes={this.state.invalidCodes}
+          clearInvalidCodes={this.clearInvalidCodes}
+          readyToClear={this.state.readyToClear}
         />
         <ValidBox
           codes={this.state.validCodes}

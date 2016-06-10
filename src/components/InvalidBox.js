@@ -26,11 +26,16 @@ export default class InvalidBox extends React.Component {
         <div className='box invalid-box'>
           {codes}
         </div>
+        {(this.props.readyToClear)  // Only render the Submit button if there are valid codes to submit
+          ? <button onClick={this.props.clearInvalidCodes} className='button' id='black-button'> Clear Invalid Codes </button>
+          : null
+        }
       </div>
     );
   }
 }
 
 InvalidBox.propTypes = {
-  codes: React.PropTypes.array.isRequired
+  codes: React.PropTypes.array.isRequired,
+  clearInvalidCodes: React.PropTypes.func.isRequired
 }
