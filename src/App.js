@@ -8,8 +8,8 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      validCodes: [],
       invalidCodes: [],
+      validCodes: [],
       readyToSubmit: false,
       notificationIsActive: false,
       notificationMessage: '',
@@ -19,11 +19,11 @@ export default class App extends React.Component {
       }
     }
 
-    this.checkCodes = this.checkCodes.bind(this);
     this.calculateCheckDigit = this.calculateCheckDigit.bind(this);
-    this.validateCode = this.validateCode.bind(this);
-    this.toggleNotification = this.toggleNotification.bind(this);
+    this.checkCodes = this.checkCodes.bind(this);
     this.clearValidCodes = this.clearValidCodes.bind(this);
+    this.toggleNotification = this.toggleNotification.bind(this);
+    this.validateCode = this.validateCode.bind(this);
   }
 
   // Assumes length 11
@@ -41,6 +41,36 @@ export default class App extends React.Component {
     }
   }
 
+  checkCodes(upc) {
+    const newCodes = this.parseCodes(upc);
+    const currentValidCodes = this.state.validCodes;
+    const currentInvalidCodes = this.state.invalidCodes;
+    let validCodes = [];
+    let invalidCodes = [];
+
+    // Validate before doing anything with the codes.
+    newCodes.forEach(code => {
+      this.validateCode(code, validCodes, invalidCodes);
+    });
+
+    // If there were valid codes in the InputForm, render them in the ValidBox
+    if (validCodes.length > 0) {
+      validCodes = currentValidCodes.concat(validCodes);
+      this.setState({ validCodes });
+      this.setState({ readyToSubmit: true });
+    }
+
+    // If there were invalid codes in the InputForm, render them in the InvalidBox
+    if (invalidCodes.length > 0) {
+      invalidCodes = currentInvalidCodes.concat(invalidCodes);
+      this.setState({ invalidCodes });
+    }
+  }
+
+  clearValidCodes() {
+    this.setState({ validCodes: [] });
+  }
+
   parseCodes(upc) {
     if (upc.includes('\n')) {
       const codes = upc.replace(/\r\n/g, '\n').split('\n');
@@ -48,6 +78,23 @@ export default class App extends React.Component {
     } else {
       return [upc];
     }
+  }
+
+  toggleNotification(message, barStyle) {
+    /*
+    This method is invoked in one of three scenarios:
+      1. duplicate UPC
+      2. valid codes are successfully submitted to the server
+      3. server error
+
+    The message and barStyle parameters allow for each scenario to customize the notification individually.
+    */
+
+    this.setState({
+      notificationIsActive: !this.state.notificationIsActive,
+      notificationMessage: message || this.state.notificationMessage,
+      barStyle: barStyle || this.state.barStyle
+    });
   }
 
   validateCode(upc, validCodes, invalidCodes) {
@@ -78,47 +125,9 @@ export default class App extends React.Component {
       return invalidCodes;
     }
 
-    // If UPC is valid, pass it along
+    // If UPC is valid, render it in validBox.
     validCodes.push(upc);
     return validCodes;
-  }
-
-  checkCodes(upc) {
-    const newCodes = this.parseCodes(upc);
-    const currentValidCodes = this.state.validCodes;
-    const currentInvalidCodes = this.state.invalidCodes;
-    let validCodes = [];
-    let invalidCodes = [];
-
-    // Validate before doing anything with the codes.
-    newCodes.forEach(code => {
-      this.validateCode(code, validCodes, invalidCodes);
-    });
-
-    // If there were valid codes in the InputForm, render them in the ValidBox
-    if (validCodes.length > 0) {
-      validCodes = currentValidCodes.concat(validCodes);
-      this.setState({ validCodes });
-      this.setState({ readyToSubmit: true });
-    }
-
-    // If there were invalid codes in the InputForm, render them in the InvalidBox
-    if (invalidCodes.length > 0) {
-      invalidCodes = currentInvalidCodes.concat(invalidCodes);
-      this.setState({ invalidCodes });
-    }
-  }
-
-  toggleNotification(message, barStyle) {
-    this.setState({
-      notificationIsActive: !this.state.notificationIsActive,
-      notificationMessage: message || this.state.notificationMessage,
-      barStyle: barStyle || this.state.barStyle
-    });
-  }
-
-  clearValidCodes() {
-    this.setState({ validCodes: [] });
   }
 
   render() {
@@ -128,19 +137,19 @@ export default class App extends React.Component {
           checkCodes={this.checkCodes}
         />
         <Notification
+          barStyle={this.state.barStyle}
           isActive={this.state.notificationIsActive}
           message={this.state.notificationMessage}
           onDismiss={this.toggleNotification}
-          barStyle={this.state.barStyle}
         />
         <InvalidBox
           codes={this.state.invalidCodes}
         />
         <ValidBox
           codes={this.state.validCodes}
+          clearValidCodes={this.clearValidCodes}
           readyToSubmit={this.state.readyToSubmit}
           toggleNotification={this.toggleNotification}
-          clearValidCodes={this.clearValidCodes}
         />
       </div>
     );
