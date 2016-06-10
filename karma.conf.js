@@ -6,9 +6,10 @@ module.exports = function(config) {
   config.set({
     browsers: [ 'PhantomJS' ],
     singleRun: true,
-    frameworks: [ 'mocha', 'chai' ],
+    frameworks: [ 'mocha', 'chai', 'phantomjs-shim' ],
     files: [
-      'tests.webpack.js'
+      'tests.webpack.js',
+      'node_modules/babel-polyfill/dist/polyfill.js'
     ],
     preprocessors: {
       'tests.webpack.js': [ 'webpack', 'sourcemap' ]
@@ -19,7 +20,8 @@ module.exports = function(config) {
       require('karma-chai'),
       require('karma-sourcemap-loader'),
       require('karma-spec-reporter'),
-      require('karma-phantomjs-launcher')
+      require('karma-phantomjs-launcher'),
+      require('karma-phantomjs-shim'),
     ],
     reporters: [ 'spec' ],
     webpack: webpackConfig,
